@@ -197,22 +197,24 @@
 		    
 		 
 		int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK); //요일 구하기 (1~7)
-		System.out.println("확인용 날짜 : " + year+"년 "+month+" 월월");
+		System.out.println("확인용 날짜 : " + year+"년 "+ month+" 월");
 		 
 
 		
 		//로그인한 사람의 id
-		 memberDto dto = (memberDto)request.getAttribute("dto");   //뉴스피드 --서블릿 -- 캘린더write
-
+		memberDto dto = (memberDto)request.getAttribute("dto");   //뉴스피드 --서블릿 -- 캘린더write
+		System.out.println("로그인한 사람의 id 확인" +dto.getId()); 
+		 
+		 
 		//caledar list
 		CalendarImpl cdao = CalendarDao.getInstance();
 	
 		boolean b = true;
 		String tday = calllist(year	,month,1,b);		
-		System.out.println(tday);
+		System.out.println("tday는 : " + tday);
 				
 		List<CalendarDto> list = cdao.getCalList(dto.getId() , tday+"");
-		 
+		System.out.println("List<CalendarDto> list 는 : " + list);  
 		%>
 		 
 		
@@ -273,7 +275,7 @@
 		                        <%=calllist(year, month, i ,false) %>		                    
 		                        &nbsp;                
 		                   		<!-- 다이어리 타이틀 뿌리기-->
-		                   		<%-- <%=dTitle(year, month, i, list) %> --%>
+		                   		<%=dTitle(year, month, i, list) %>
 		                    </td>
 		                    
 		                <%

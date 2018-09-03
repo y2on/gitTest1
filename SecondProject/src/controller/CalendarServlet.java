@@ -15,14 +15,14 @@ import dao.CalendarDao;
 import dao.MemberDao;
 import dto.memberDto;
 
-public class CalendarServlet extends HttpServlet {
+public class CalendarServlet extends HttpServlet{
 	
 	
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("캘린더서블릿 1");
-		doProcess(req, resp);
+		doProcess(req, resp); 
 	}
 	
 	
@@ -49,14 +49,18 @@ public class CalendarServlet extends HttpServlet {
 			System.out.println("캘린더서블릿 gocal");
 			
 			 String id = req.getParameter("id");
-	         String pw = req.getParameter("pw");
-
-	         memberDto dto = mdao.doLogin(id, pw);
+	         System.out.println( "뉴스피드에서 받아온 " + id);
+	         
+	//       memberDto dto = mdao.doLogin(id, pw);	   //doLogin() 리턴값 == dto               == ID, NICK, NAME 
+	         memberDto dto= new memberDto(id,"닉넴","비번"); //doLogin() 없이, 캘린더 기능확인용                 : 지우세여
+	         System.out.println("디티오있냐" + dto);
+	         
 	         if (dto != null) {
 	             req.setAttribute("dto", dto);
+	             
 	             dispatch("CalendarWrite.jsp", req, resp);
 	         }
-
+	         System.out.println("command == gocal 종료" );  
 		}
 		// 캘린더write --서블릿 -- DiaryWrite
 		else if(command.equals("writeDiary")){
@@ -71,10 +75,13 @@ public class CalendarServlet extends HttpServlet {
 		
 	}
 
+
 	public void dispatch(String urls, HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
 		RequestDispatcher dispatch = req.getRequestDispatcher(urls);
 		dispatch.forward(req, resp);
 	}
+
+	
 }

@@ -27,7 +27,7 @@ public class CalendarDao implements CalendarImpl{
 			
 			String sql = " SELECT TITLE "
 					+ " FROM DIARY "
-					+ " WHERE ID=" + id; 
+					+ " WHERE ID = ? " + id; 
 			
 			Connection conn = null;
 			PreparedStatement psmt = null;
@@ -39,9 +39,8 @@ public class CalendarDao implements CalendarImpl{
 				conn = DBConnection.makeConnection();
 				System.out.println("1/6 getCalList 성공");
 				
-				
-				psmt = conn.prepareStatement(sql);
-				
+				psmt = conn.prepareStatement(sql);		 				
+			
 				rs = psmt.executeQuery();
 				System.out.println("2/6 getCalList 성공");
 			
@@ -54,6 +53,7 @@ public class CalendarDao implements CalendarImpl{
 				list.add(dto);
 				}
 				System.out.println("3/6 getCalList 성공"); 	
+				
 			} catch (SQLException e) { 
 				e.printStackTrace();
 			}finally {

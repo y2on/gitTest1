@@ -87,7 +87,7 @@
 <button type="button" onclick="gocal()">글쓰기</button>
 <script type="text/javascript">
 function gocal() {
-	location.href = "CalendarServlet?command=gocal&id=1&pw=1";
+	location.href = "CalendarServlet?command=gocal&id=1";
 }  
 </script>
  
